@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookAdminServiceImpl {
-    private BookDto bookDto = new BookDto();
+
     public final BookRepository bookRepository;
 
     public BookAdminServiceImpl(BookRepository bookRepository) {
@@ -18,6 +18,7 @@ public class BookAdminServiceImpl {
     }
 
     public BookDto bookDtoConvert(Book book) {
+        BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
         bookDto.setTitle(book.getTitle());
         bookDto.setAuthor(book.getAuthor());
@@ -28,7 +29,14 @@ public class BookAdminServiceImpl {
     }
 
     public BookDto findById(Long id) {
-        bookRepository.findById(id).get();
+        Book book = bookRepository.findById(id).get();
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setAuthor(book.getAuthor());
+        bookDto.setPrice(book.getPrice());
+        bookDto.setImage(book.getImage());
+        bookDto.setGenre(book.getGenre());
         return bookDto;
 
     }
@@ -46,8 +54,8 @@ public class BookAdminServiceImpl {
     }
 
     public List<BookDto> findAll() {
-        return bookRepository
-                .findAll()
+        return  ((List<Book>) bookRepository
+                .findAll())
                 .stream()
                 .map(this::bookDtoConvert)
                 .collect(Collectors.toList());
