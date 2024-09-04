@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:f="http://www.w3.org/1999/xhtml"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Book </title>
+    <link rel="stylesheet" th:href="@{/css/books.css}" />
+</head>
+<body>
+<div class="container my-2" align="center">
+    <h3>Каталог книг</h3>
+    <a th:href="@{/bookSave}"
+       class="btn btn-danger">Создать книгу</a>
+    <table>
+        <tbody>
+        <tr th:each="book:${bookList}">
+            <td><img class="info" th:attr="src=@{${book.image}}"
+                     width="260"
+                     height="260"
+                     /></td>
+            <td th:text="@{'Автор: '+${book.author}}" ></td>
+            <td th:text="@{'Жанр: '+${book.genre}}"></td>
+            <td th:text="@{'Название: '+${book.title}}"></td>
+            <td th:text="@{'Цена: '+${book.price}}"></td>
+            <td>
+                <a th:href="@{/bookDelete(id=${book.id})}"
+                   class="btn btn-danger">Удалить книгу</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

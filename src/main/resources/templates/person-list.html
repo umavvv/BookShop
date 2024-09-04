@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Employee</title>
+</head>
+<body>
+<div class="container my-2" align="center">
+    <h3>Person List</h3>
+    <table>
+        <tbody>
+        <tr th:each="person:${personList}">
+            <td th:text="@{'Логин: '+${person.login}}" ></td>
+            <td th:text="@{'Пароль: '+${person.password}}"></td>
+            <td>
+                <a th:href="@{/personDelete(id=${person.id})}"
+                   class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
